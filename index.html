@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rhyzen Hub</title>
+    <title>Rhyzen Hub | MM2</title>
     <style>
         * {
             margin: 0;
@@ -172,89 +172,85 @@
             font-size: 1rem;
         }
 
-        /* Script Preview */
-        .script-preview {
-            padding: 3rem 2rem;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .preview-card {
-            background: #1a1a1a;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            overflow: hidden;
-        }
-
-        .preview-header {
-            padding: 1.5rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .preview-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-        }
-
-        .dot-red { background: #ff5f56; }
-        .dot-yellow { background: #ffbd2e; }
-        .dot-green { background: #27c93f; }
-
-        .preview-content {
-            padding: 2rem;
-        }
-
-        .preview-content img {
-            width: 100%;
-            border-radius: 10px;
-        }
-
-        /* Executors Section */
+        /* Executors Section with Animation */
         .executors {
             padding: 4rem 2rem;
             text-align: center;
-            max-width: 1200px;
-            margin: 0 auto;
+            overflow: hidden;
         }
 
         .section-title {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             color: #9ca3af;
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .executor-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1.5rem;
-            max-width: 900px;
-            margin: 0 auto;
+        .executor-scroll {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            padding: 1rem 0;
         }
 
-        .executor-card {
+        .executor-track {
+            display: flex;
+            gap: 2rem;
+            animation: scroll 20s linear infinite;
+        }
+
+        .executor-track:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .executor-item {
+            flex-shrink: 0;
             background: #1a1a1a;
             border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            padding: 2rem 1rem;
-            transition: transform 0.2s, border-color 0.2s;
+            border-radius: 20px;
+            padding: 2rem 3rem;
+            min-width: 180px;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
         }
 
-        .executor-card:hover {
+        .executor-item:hover {
             transform: translateY(-5px);
             border-color: #00d9ff;
+            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.2);
         }
 
         .executor-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #00d9ff 0%, #06b6d4 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #000000;
         }
 
         .executor-name {
             font-weight: 600;
             font-size: 1.1rem;
+            color: #ffffff;
         }
 
         /* Features Section */
@@ -393,12 +389,14 @@
             justify-content: center;
             gap: 2rem;
             margin-bottom: 2rem;
+            flex-wrap: wrap;
         }
 
         .social-links a {
             color: #9ca3af;
             text-decoration: none;
             transition: color 0.2s;
+            font-size: 1rem;
         }
 
         .social-links a:hover {
@@ -434,7 +432,6 @@
             }
 
             .stats-grid,
-            .executor-grid,
             .feature-grid {
                 grid-template-columns: 1fr;
             }
@@ -443,8 +440,13 @@
                 flex-direction: column;
             }
 
-            .copy-btn {
+            .copy-btn, .view-btn {
                 width: 100%;
+            }
+
+            .executor-item {
+                min-width: 150px;
+                padding: 1.5rem 2rem;
             }
         }
     </style>
@@ -464,17 +466,17 @@
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="tag">• Built for the future of [Your Game]</div>
+        <div class="tag">• Built for the future of MM2</div>
         <p class="update-text">New update coming soon, WIP 👀</p>
         
         <h1>Level up your game.<br><span class="highlight">Rhyzen Hub.</span></h1>
         
-        <p>Free script for [Your Game]. Auto-farm, ESP, powerful tools. One hub. No clutter.</p>
+        <p>Free script for Murder Mystery 2. Auto-farm coins, stay safe from the murderer, ESP, combat tools. One hub. No clutter.</p>
         
         <button class="copy-btn" onclick="copyScript()">Copy loadstring</button>
         
         <p class="tagline">The power and trust is here.</p>
-        <p class="sub-tagline">The best valuable keyless script right now 🙂</p>
+        <p class="sub-tagline">The best valuable keyless autofarm right now 🙂</p>
     </section>
 
     <!-- Stats Section -->
@@ -498,29 +500,54 @@
         </div>
     </section>
 
-    <!-- Executors Section -->
+    <!-- Executors Section with Scrolling Animation -->
     <section class="executors">
         <p class="section-title">Compatible with Delta, KRNL, Codex, Potassium, and many more!</p>
-        <div class="executor-grid">
-            <div class="executor-card">
-                <div class="executor-icon">Δ</div>
-                <div class="executor-name">Delta</div>
-            </div>
-            <div class="executor-card">
-                <div class="executor-icon">K</div>
-                <div class="executor-name">KRNL</div>
-            </div>
-            <div class="executor-card">
-                <div class="executor-icon">C</div>
-                <div class="executor-name">Codex</div>
-            </div>
-            <div class="executor-card">
-                <div class="executor-icon">P</div>
-                <div class="executor-name">Potassium</div>
-            </div>
-            <div class="executor-card">
-                <div class="executor-icon">+</div>
-                <div class="executor-name">Many more</div>
+        <div class="executor-scroll">
+            <div class="executor-track">
+                <!-- First set of executors -->
+                <div class="executor-item">
+                    <div class="executor-icon">Δ</div>
+                    <div class="executor-name">Delta</div>
+                </div>
+                <div class="executor-item">
+                    <div class="executor-icon">K</div>
+                    <div class="executor-name">KRNL</div>
+                </div>
+                <div class="executor-item">
+                    <div class="executor-icon">C</div>
+                    <div class="executor-name">Codex</div>
+                </div>
+                <div class="executor-item">
+                    <div class="executor-icon">P</div>
+                    <div class="executor-name">Potassium</div>
+                </div>
+                <div class="executor-item">
+                    <div class="executor-icon">+</div>
+                    <div class="executor-name">Many more</div>
+                </div>
+                
+                <!-- Duplicate set for seamless loop -->
+                <div class="executor-item">
+                    <div class="executor-icon">Δ</div>
+                    <div class="executor-name">Delta</div>
+                </div>
+                <div class="executor-item">
+                    <div class="executor-icon">K</div>
+                    <div class="executor-name">KRNL</div>
+                </div>
+                <div class="executor-item">
+                    <div class="executor-icon">C</div>
+                    <div class="executor-name">Codex</div>
+                </div>
+                <div class="executor-item">
+                    <div class="executor-icon">P</div>
+                    <div class="executor-name">Potassium</div>
+                </div>
+                <div class="executor-item">
+                    <div class="executor-icon">+</div>
+                    <div class="executor-name">Many more</div>
+                </div>
             </div>
         </div>
     </section>
@@ -529,13 +556,13 @@
     <section class="card-section">
         <div class="main-card">
             <div class="card-tags">
-                <span class="card-tag">[Game]</span>
+                <span class="card-tag">MM2</span>
                 <span class="card-tag card-tag free">Free</span>
             </div>
             
             <h2 class="card-title">Rhyzen Hub FREE</h2>
             
-            <p class="card-description">The most capable free script for [Your Game]. Auto-farm, ESP, combat tools, and more. One menu. Copy and run.</p>
+            <p class="card-description">The most capable free script for Murder Mystery 2. Autofarm coins while staying away from the murderer, ESP, aimbot, round tools. One menu. Copy and run.</p>
             
             <div class="feature-tags">
                 <span class="feature-tag">Autofarm</span>
@@ -546,14 +573,14 @@
             </div>
             
             <div class="card-buttons">
-                <a href="#screenshots" class="view-btn">View</a>
+                <a href="#features" class="view-btn">View</a>
                 <button class="copy-btn" onclick="copyScript()">Copy loadstring</button>
             </div>
         </div>
     </section>
 
     <!-- Features -->
-    <section class="features">
+    <section id="features" class="features">
         <h2>Why this one?</h2>
         <p class="features-subtitle">Built for players who want more. Join thousands getting ahead.</p>
         
@@ -563,12 +590,12 @@
                 <p>When the game changes, we update. You never have to hunt for a new script.</p>
             </div>
             <div class="feature-item">
-                <h3>Powerful features</h3>
-                <p>Auto-farm, ESP, combat tools, and everything you need in one hub.</p>
+                <h3>Collect coins and stay safe</h3>
+                <p>It grabs coins for you and picks the next one away from the murderer. Farm without the stress.</p>
             </div>
             <div class="feature-item">
                 <h3>One menu for everything</h3>
-                <p>All features in one place. No confusing tabs or complicated setup.</p>
+                <p>Coins, who's who, round tools. All in one place. No confusing tabs.</p>
             </div>
             <div class="feature-item">
                 <h3>Simple to run</h3>
@@ -577,26 +604,12 @@
         </div>
     </section>
 
-    <!-- Script Preview -->
-    <section id="screenshots" class="script-preview">
-        <div class="preview-card">
-            <div class="preview-header">
-                <div class="preview-dot dot-red"></div>
-                <div class="preview-dot dot-yellow"></div>
-                <div class="preview-dot dot-green"></div>
-            </div>
-            <div class="preview-content">
-                <img src="https://via.placeholder.com/800x500/1a1a1a/00d9ff?text=Your+Script+UI+Preview" alt="Script UI">
-            </div>
-        </div>
-    </section>
-
     <!-- Footer -->
     <footer>
         <div class="social-links">
-            <a href="#">YouTube</a>
-            <a href="#">TikTok</a>
-            <a href="#">Discord</a>
+            <a href="https://www.youtube.com/@RhyzenOwnsYou" target="_blank">YouTube</a>
+            <a href="https://www.tiktok.com/@ladensssss" target="_blank">TikTok</a>
+            <a href="https://discord.gg/hk8Pgn6Uz" target="_blank">Discord</a>
         </div>
         <p>Made with care by Rhyzen Hub. One place for everything.</p>
     </footer>
